@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="1" >
+    <title>Canvas</title>
+
+    <style type="text/css">
+    canvas{
+        background: lightcyan;
+        border: 5px dashed darkblue;
+    }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <canvas id="canvasOne" width =700 height=600></canvas>
+
+    <script type="text/javascript">
+		// Gets a handle to the element with id canvasOne.
+		var canvas = document.getElementById("canvasOne");
+		// Set the canvas up for drawing in 2D.
+		var ctx = canvas.getContext("2d");
+		// Set the fill colour to bright red.
+		//ctx.fillStyle = "rgb(255, 0, 0)";
+		// Create a filled rectangle at co-ordinates (10,10)
+		// with height and width set to 100.
+		//ctx.fillRect(10, 10, 100, 100);
+
+        var xpos = "10";
+        var ypos = "10";
+
+        console.log("The x position " + xpos);
+
+        function move(addToX, addToY){
+            xpos += addToX;
+            ypos += addToY;
+        }
+
+        move(5,3);
+        console.log("The y position " + ypos);
+
+
+        var ball = {
+            x: 7,
+            y: 8,
+            move: function move(addToX, addToY)
+            {
+                this.x += addToX;
+                this.y += addToY;
+            },
+            draw (addToX, addToY) {
+            ctx.beginPath();
+            ctx.arc(80,80,40,0,2*Math.PI);
+            ctx.fillStyle = "rgb(255,165,0)";
+            ctx.fill();
+            ctx.stroke();
+            }
+
+        }
+
+
+
+    </script>
+
+  </body>
+
+</html>

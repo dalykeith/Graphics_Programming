@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+
+    <style type="text/css">
+      body {
+          background-color: white;
+      }
+      canvas{
+        border: 1px solid rgb(100, 100, 100);
+        background: transparent;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+
+    <canvas id="canvas-for-ball"></canvas>
+
+    <script type="text/javascript">
+      // Gets a handle to the element with id canvasOne.
+      var canvas = document.getElementById("canvas-for-ball");
+      // Get a 2D context for the canvas.
+      var ctx = canvas.getContext("2d");
+
+      //radius of ball
+      var radius = 5;
+      var x = canvas.width/2;
+      var y = canvas.height-30;
+      var dx = 2;
+      var dy = -2;
+
+    //create the ball
+    function drawBall() {
+    //innitiate
+    ctx.beginPath();
+    //ball structure
+    ctx.arc(x,y,radius,0,Math.PI*2);
+    //ctx.arc(x, y, radius, 0, Math.PI*2);
+    //color
+    ctx.fillStyle = "orange";
+    ctx.fill();
+    ctx.closePath();
+    }
+
+    function draw() {
+    //clear ball as generated
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //run function
+    drawBall();
+
+    if(x + dx > canvas.width-radius || x + dx < radius) {
+        dx = -dx;
+    }
+    if(y + dy > canvas.height-radius || y + dy < radius) {
+        dy = -dy;
+    }
+
+    x += dx;
+    y += dy;
+
+    }
+      // Get the animation going & speed generated
+      setInterval(draw, 25);
+
+    </script>
+
+
+  </body>
+
+</html>
