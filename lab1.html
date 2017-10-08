@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 
+
 <html>
 
   <head>
+    <!-- refresh timer - used for testing -->
+    <meta http-equiv="refresh" content="8">
     <meta charset="UTF-8">
     <title>Canvas</title>
 
     <style type="text/css">
+
     canvas{
         background: lightgreen;
-        border: 4px solid #0000FF;
+        border: 1.5px solid black;
     }
 
     </style>
@@ -28,34 +32,81 @@
 
     //Red Rectangle
 		// Set the fill colour to bright red.
-		ctx.fillStyle = "rgb(255, 0, 0)";
-		// Create a filled rectangle at co-ordinates (10,10)
-		// with height and width set to 100.
+    ctx.fillStyle = "rgb(255, 0, 0)";
 		ctx.fillRect(10, 15, 300, 150);
+
+
+    //DrawRect();
+
+    function DrawRect()
+    		{
+    			ctx.fillStyle = "rgb(255,165,0)";
+    			ctx.fillRect(50, 15, 300, 150);
+    		}
+
+    		//3 second timer
+    		setTimeout(DrawRect, 3000);
+    		ctx.translate(300, 0);
+    //another rectangle
+    ctx.beginPath();
+    ctx.fillStyle = "green";
+    ctx.fillRect(-30, 240,180,75);
+    ctx.stroke();
+
+    //Big circle
+		ctx.beginPath();
+		ctx.arc(-100, 340, 60, 0, Math.PI*2, true);
+    	ctx.fillStyle = "pink";
+		ctx.closePath();
+		ctx.fill();
 
     //Transparent Blue Square
 		ctx.beginPath();
 		ctx.lineWidth="1";
 		ctx.strokeStyle="blue";
 		ctx.fillStyle = "rgba(0,0,250, 0.5)";
-		ctx.rect(25,30,200,180);
+		ctx.rect(-30,25,200,180);
 		ctx.stroke();
 	  ctx.fill();
+
+    // Pacman
+    ctx.beginPath();
+		ctx.arc(100,400,0,1*Math.PI,1*Math.PI);
+		ctx.arc(100,400,50,0.5,1.8*Math.PI);
+		ctx.arc(100,400,0,1*Math.PI,1*Math.PI);
+		ctx.fillStyle = "rgb(255, 255, 0)";
+		ctx.fill();
+		ctx.stroke();
+		//Eye
+		ctx.beginPath();
+		ctx.arc(100,370,5,0,2*Math.PI);
+		ctx.fillStyle = "rgb(0,0,0)";
+		ctx.fill();
+		ctx.stroke();
 
     //Small circle
 		ctx.beginPath();
-		ctx.arc(500, 140, 20, 0, Math.PI*2, true);
+		ctx.arc(250, 390, 20, 0, Math.PI*2, true);
+    	ctx.fillStyle = "blue";
 		ctx.closePath();
 		ctx.fill();
 
+		
 
-    // Pacman
+		//Square
 		ctx.beginPath();
-		ctx.strokeStyle="rgb(255,165,0)";
-		//ctx.fillStyle = "rgba(0,0,250, 0.5)";
-		ctx.arc(200,400,150,150,Math.PI);
+		ctx.lineWidth="1";
+		ctx.strokeStyle="light-blue";
+		ctx.fillStyle = "rgba(0,0,250, 0.5)";
+		ctx.rect(-210,430,100,100);
 		ctx.stroke();
-	  ctx.fill();
+	  	ctx.fill();
+	  	//Circle
+		ctx.beginPath();
+		ctx.arc(-160, 480, 45, 0, Math.PI*2, true);
+    	ctx.fillStyle = "rgb(219,112,147)";
+		ctx.closePath();
+		ctx.fill();
 
     /*ctx.beginPath();
 		ctx.lineWidth = 100;
