@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+Author: Keith Daly
+ID: G00315960
+Graphics Programming GMIT 2017
+Lab4
+-->
+
+<html>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <head>
+    <meta charset="UTF-8">
+    <title>Lab4</title>
+
+    <style type="text/css">
+      body {
+        /* background behind canvas */
+          background-color: floralwhite;
+      }
+      /* canvas square centered */
+      canvas{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border: 2px solid black;
+        background: white;
+      }
+    </style>
+  </head>
+
+  <body>
+<!--canvas size-->
+  <canvas id="canvas-for-ball" width =700 height=550></canvas>
+    <script type="text/javascript">
+    // start with no mouse clicks
+      var noClicks = 0;
+      
+      // Gets a handle to the element with id canvasOne.
+      var canvas = document.getElementById("canvas-for-ball");
+      // Get a 2D context for the canvas.
+      var ctx = canvas.getContext("2d");
+      // Make the fill style red.
+      ctx.fillStyle = "rgb(255, 0, 0)";
+      
+      //on click, E will be position of ball location
+      $("#canvas-for-ball").click(function(e){ 
+        getPosition(e); 
+      });
+      
+      var  radius = 15;
+      //var radius2 = 22;
+      
+    
+
+function getPosition(event){
+     var rect = canvas.getBoundingClientRect();
+     var x = event.clientX - rect.left;
+     var y = event.clientY - rect.top;
+        
+     drawCoordinates(x,y);
+}
+
+function drawCoordinates(x,y){	
+  	var ctx = document.getElementById("canvas-for-ball").getContext("2d");
+
+
+  	
+    ctx.beginPath();
+    ctx.arc(x, y, radius1,6, 0, 2 * Math.PI);
+    ctx.fillStyle = "red";
+    ctx.fill();
+
+    // ctx.beginPath();
+    // ctx.arc(x, y, radius2,6, 0, 2 * Math.PI);
+    // ctx.fillStyle = "red";
+    // ctx.fill();
+}
+    
+      // canvas.addEventListener("click", function(event) { 
+      //   ctx.beginPath();
+      //   ctx.arc(event.clientX, event.clientY, 6, 0, 2 * Math.PI);
+      //   ctx.fill();
+        
+      //   noClicks += 1;
+      //   console.log(noClicks);
+      // });
+    </script>
+  </body>
+
+  </html>
+
+  <!--class Ball {
+        radius = 10;
+        color = 'orange';
+        x = 5;
+        y = 5;
+      }
+
+    draw: function(Ball) {
+      canvas.addEventListener("click", function(event) {
+      ctx.beginPath();
+      //ctx.fillStyle = "orange";
+      ctx.arc(x, y, radius, 0, Math.PI*2, true);
+      ctx.closePath();
+      ctx.fill();
+
+      noClicks += 1;
+         console.log(noClicks);
+      }-->
