@@ -3,7 +3,8 @@
 
 This is my first repository of web graphics.
 
-This repository contains code written in the programming languages HTML, CSS, JS.
+This repository contains code written in the programming languages HTML, CSS, JS and python.
+With implementation of three.js and D3js.org
 
 Author: Keith Daly.
 
