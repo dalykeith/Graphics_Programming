@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<!--D3 and jQuery CDN(Content Delivery Network)-->
+     <script src="https://d3js.org/d3.v4.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>D3.js Demo</title>
+ 
+    <style type="text/css">
+    path{
+        fill : red;
+    }
+    </style>
+    
+</head>
+
+<body>
+    <div align="center">
+        <h1>Currency Data GBP/EUR by Date in D3.js</h1>
+    </div>
+   
+    <script type="text/javascript">
+    //Callback function
+    function callback(json)
+    {
+        console.log(JSON.stringify(json.currency))
+        data=json.currency;
+        plotCurrencyData(data);
+    }
+    //data link where data is stored online on server        
+    $.ajax({
+        url :"http://34.249.149.110:5000/",
+        dataType: "jsonp"
+    });
+
+    //plotCurrencyData function
+    function plotCurrencyData(data)
+    {
+        var margin = {top:50,right:50,bottom:50,left:50},
+        width = 900 - margin.left - margin.right,
+        height = 670 - margin.top - margin.bottom;
+        padding = 100
+
+        var parseDate = d3.timeParse("%d/%m/%Y");
+        
+      
+        //Scales (X & Y)
+        var x = d3.scaleTime()
+            .domain(d3.extent(data,function(d){return parseDate(d["Date"]);}))
+            .range([padding,width-padding]); //0,width 
+        var y = d3.scaleLinear()
+            .domain(d3.extent(data,function(d){return d["GBP/EUR"]}))
+            .range([height-padding,padding]);
+    
+        //Axes (X & Y)
+        var xAxis = d3.axisBottom(x)
+            .ticks(10); 
+        var yAxis = d3.axisLeft(y)
+            .ticks(10);
+
+        //Maping location
+        var valueLine = d3.line()
+            .x(function(d){ return x(parseDate(d["Date"]));})
+            .y(function(d){ return y(d["GBP/EUR"]);});
+        
+        var svg= d3.select('body')
+                    .append("svg")
+                    .attr("width",width + margin.left +margin.right)
+                    .attr("height",height +margin.top + margin.bottom)
+                    .append("g")
+
+                    //addition that makes numeric values visable
+                    .attr("transform","translate("+margin.left + ","+ margin.top+")");
+
+                    //Add Axis
+                    //Append a <g> - group element
+                    svg.append('g')  
+                    //specify classes       
+                    .attr('class','x axis')
+                    .attr("transform", "translate(0," + (height - padding) + ")")
+                    .call(xAxis);
+
+                    //Append a <g> - group element
+                    svg.append('g')     
+                    .attr('class','y axis')
+                    .attr("transform", "translate("+padding+",0)")
+                    .call(yAxis);     
+                
+                    //draw the path and add the valueline path
+                    svg.append("path")     
+                    .attr("d",valueLine(data));
+                  
+                    // Rotate text on x axis
+                    // Rotate up to get 45 degrees.
+                    // Select * text elements frm xAxis
+                    svg.selectAll(".xaxis text")  
+                    .attr("transform", function(d) {
+                        return "translate(" + this.getBBox().height*-2 + "," + this.getBBox().height + ")rotate(-45)";
+                    });
+                    
+                    svg.append("text")
+                    //Centralise the text
+                        .attr("text-anchor", "middle")
+                        //Text is drawn off the screen top left, move down and out and rotate  
+                        .attr("transform", "translate("+ (padding/2) +","+(height/2)+")rotate(-90)") 
+                        .style("font-size", "30px") 
+                        .text("GBP/EUR");
+
+                    svg.append("text")
+                        .attr("text-anchor", "middle") 
+                        // Centre below the  x(Date)Axis 
+                        .attr("transform", "translate("+ (width/2) +","+(height-(padding/3))+")") 
+                        .style("font-size", "30px") 
+                        .text("Date");
+                        
+            } //func end
+        </script>
+    </body>
+</html>
